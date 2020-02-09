@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 echo "START INIT SCRIPT"
 
 git clone https://github.com/Przemocny/react-redux-wordpress-theme.git ./app
@@ -9,8 +8,7 @@ echo "THEME FROM REPO DONE"
 yarn
 echo "PACKAGES DONE"
 
-yarn build
-echo "BUILD DONE"
+# yarn start
 
-# yarn add serve
+yarn build
 serve -s build
