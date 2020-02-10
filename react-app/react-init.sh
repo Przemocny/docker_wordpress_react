@@ -9,6 +9,6 @@ yarn
 echo "PACKAGES DONE"
 
 yarn start
-
 # yarn build
-# serve -s build
+
+# exec node ~/usr/app/node_modules/serve/bin/serve.js -s build -l 3000

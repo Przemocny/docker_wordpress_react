@@ -14,76 +14,76 @@ services:
       - 8080:3000
     networks: 
       - backend
-    links:
-      - wordpress
+    # links:
+      # - wordpress
     command: bash -c "./react-init.sh"
 
-  wordpress:
-    image: wordpress:latest
-    env_file: ./.env
-    restart: on-failure
-    ports:
-      - 3000:80
-    volumes:
-      # to wordpress debug & working on
-      # - ./wp-app/wordpress:/var/www/html
-      - ./wp-app/php.conf.ini:/usr/local/etc/php/conf.d/conf.ini
-      - ./wp-app/config.yml:/var/www/html/config.yml
-      - ./wp-app/wp-init.sh:/usr/local/bin/wp-init.sh
-      - ./wp-app/wait-for-it.sh:/usr/local/bin/wait-for-it.sh
-      - ./wp-app/themes/:/var/www/html/wp-content/themes/
-    environment:
-      WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: "${MYSQL_USER}"
-      WORDPRESS_DB_NAME: "${MYSQL_DATABASE}"
-      WORDPRESS_DB_PASSWORD: "${MYSQL_PASSWORD}"
-      WP_URL: "${WP_URL}"
-      WP_TITLE: "${WP_TITLE}"
-      WP_ADMIN_NAME: "${WP_ADMIN_NAME}"
-      WP_ADMIN_EMAIL: "${WP_ADMIN_EMAIL}"
-      WP_ADMIN_PASSWORD: "${WP_ADMIN_PASSWORD}"
-    depends_on:
-      - db
-    links:
-      - db 
-    networks: 
-      - backend
-    command: wait-for-it.sh -h db -p 3306 -t 60 -- wp-init.sh
+  # wordpress:
+  #   image: wordpress:latest
+  #   env_file: ./.env
+  #   restart: on-failure
+  #   ports:
+  #     - 3000:80
+  #   volumes:
+  #     # to wordpress debug & working on
+  #     # - ./wp-app/wordpress:/var/www/html
+  #     - ./wp-app/php.conf.ini:/usr/local/etc/php/conf.d/conf.ini
+  #     - ./wp-app/config.yml:/var/www/html/config.yml
+  #     - ./wp-app/wp-init.sh:/usr/local/bin/wp-init.sh
+  #     - ./wp-app/wait-for-it.sh:/usr/local/bin/wait-for-it.sh
+  #     - ./wp-app/themes/:/var/www/html/wp-content/themes/
+  #   environment:
+  #     WORDPRESS_DB_HOST: db
+  #     WORDPRESS_DB_USER: "${MYSQL_USER}"
+  #     WORDPRESS_DB_NAME: "${MYSQL_DATABASE}"
+  #     WORDPRESS_DB_PASSWORD: "${MYSQL_PASSWORD}"
+  #     WP_URL: "${WP_URL}"
+  #     WP_TITLE: "${WP_TITLE}"
+  #     WP_ADMIN_NAME: "${WP_ADMIN_NAME}"
+  #     WP_ADMIN_EMAIL: "${WP_ADMIN_EMAIL}"
+  #     WP_ADMIN_PASSWORD: "${WP_ADMIN_PASSWORD}"
+  #   depends_on:
+  #     - db
+  #   links:
+  #     - db 
+  #   networks: 
+  #     - backend
+  #   command: wait-for-it.sh -h db -p 3306 -t 60 -- wp-init.sh
  
-  pma:
-    image: phpmyadmin/phpmyadmin
-    restart: always
-    environment:
-      PMA_HOST: db
-      PMA_PORT: 3306
-      MYSQL_ROOT_PASSWORD: "${MYSQL_PASSWORD}"
-      MYSQL_USER: "${MYSQL_USER}"
-    ports:
-      - 3001:80
-    links:
-      - db
-    networks: 
-      - backend
+  # pma:
+  #   image: phpmyadmin/phpmyadmin
+  #   restart: always
+  #   environment:
+  #     PMA_HOST: db
+  #     PMA_PORT: 3306
+  #     MYSQL_ROOT_PASSWORD: "${MYSQL_PASSWORD}"
+  #     MYSQL_USER: "${MYSQL_USER}"
+  #   ports:
+  #     - 3001:80
+  #   links:
+  #     - db
+  #   networks: 
+  #     - backend
 
-  db:
-    image: mysql:5.7
-    ports:
-      - 3306:3306
-    restart: always
-    command: [
-        '--default_authentication_plugin=mysql_native_password',
-        '--character-set-server=utf8mb4',
-        '--collation-server=utf8mb4_unicode_ci'
-    ]
-    volumes:
-      - mysql:/var/lib/mysql
-    environment:
-      MYSQL_DATABASE: "${MYSQL_DATABASE}"
-      MYSQL_USER: "${MYSQL_USER}"
-      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
-      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
-    networks: 
-      - backend
+  # db:
+  #   image: mysql:5.7
+  #   ports:
+  #     - 3306:3306
+  #   restart: always
+  #   command: [
+  #       '--default_authentication_plugin=mysql_native_password',
+  #       '--character-set-server=utf8mb4',
+  #       '--collation-server=utf8mb4_unicode_ci'
+  #   ]
+  #   volumes:
+  #     - mysql:/var/lib/mysql
+  #   environment:
+  #     MYSQL_DATABASE: "${MYSQL_DATABASE}"
+  #     MYSQL_USER: "${MYSQL_USER}"
+  #     MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+  #     MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+  #   networks: 
+  #     - backend
 
 networks: 
   backend:

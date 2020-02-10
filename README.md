@@ -15,7 +15,7 @@
 - ./react-app - stuff about react app, how to run to dev or build
 - ./wp-app - stuff about wp, plugins, configs, wordpress initilization by wp-cli
 - ./docker-compose.yml - configuration of image
-- .env - enviroment constants
+- .env - enviroment constants - you can change GITHUB_REACT_REPO to your repo with react theme
 
 ## Fill free to use, if you like it, give us a star
 ## Contact at contact@localhost-group.com
