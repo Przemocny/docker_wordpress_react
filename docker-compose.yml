@@ -8,7 +8,7 @@ services:
     restart: on-failure
     volumes:
       # to react app debug & working on
-      # - ./react-app/react:/usr/app
+      - ./react-app/react:/usr/app
       - ./react-app/react-init.sh:/usr/app/react-init.sh
     ports:
       - 8080:3000

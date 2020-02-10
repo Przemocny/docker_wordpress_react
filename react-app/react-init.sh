@@ -8,7 +8,7 @@ echo "THEME FROM REPO DONE"
 yarn
 echo "PACKAGES DONE"
 
-# yarn start
+yarn start
 
-yarn build
-serve -s build
+# yarn build
+# serve -s build
