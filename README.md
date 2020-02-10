@@ -27,7 +27,7 @@
 #### TODOS:
 - jest
 - prod image
-
+- line endings check
 
 
 
