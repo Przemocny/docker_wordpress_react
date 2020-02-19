@@ -8,7 +8,8 @@ echo "THEME FROM REPO DONE"
 yarn
 echo "PACKAGES DONE"
 
+# to run dev version
 yarn start
-# yarn build
 
-# exec node ~/usr/app/node_modules/serve/bin/serve.js -s build -l 3000
+# to run prod version
+# yarn deploy
