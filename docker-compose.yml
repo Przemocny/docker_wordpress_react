@@ -14,7 +14,7 @@ services:
       - 8080:3000
     networks: 
       - backend
-    # links:
+    links:
       - wordpress
     command: bash -c "./react-init.sh"
 
