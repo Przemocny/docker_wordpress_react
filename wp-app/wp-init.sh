@@ -30,16 +30,24 @@ wp option update --allow-root permalink_structure '/%postname%/'
 wp rewrite --allow-root structure --hard '/%postname%/'
 
 echo "DONE INSTALL WP"
-wp theme activate redirect --allow-root
+# wp theme activate redirect --allow-root
 
 echo "DONE THEMING"
-wp plugin install advanced-custom-fields --activate --allow-root
-wp plugin install advanced-custom-fields --activate --allow-root
-wp plugin install acf-to-rest-api --activate --allow-root
-wp plugin install wp-rest-cache --activate --allow-root
-wp plugin install wp-rest-api-v2-menus --activate --allow-root
+
+wp plugin install advanced-custom-fields-pro.zip --activate --allow-root --path=/var/www/html
+# wp plugin install acf-to-rest-api --activate --allow-root
+# wp plugin install wp-rest-cache --activate --allow-root
+# wp plugin install wp-rest-api-v2-menus --activate --allow-root
 wp plugin install contact-form-7 --activate --allow-root
-wp plugin install imagify --activate --allow-root
+# wp plugin install imagify --activate --allow-root
+wp plugin install woocommerce --activate --allow-root
+wp plugin install https://github.com/dotpay/WooCommerce2/archive/master.zip --activate --allow-root
+
+wp plugin install https://github.com/wp-graphql/wp-graphql/archive/master.zip --activate --allow-root
+wp plugin install https://github.com/wp-graphql/wp-graphiql/archive/master.zip --activate --allow-root
+wp plugin install https://github.com/wp-graphql/wp-graphql-woocommerce/archive/master.zip --activate --allow-root
+wp plugin install https://github.com/wp-graphql/wp-graphql-acf/archive/master.zip --activate --allow-root
+
 echo "DONE PLUGINS"
 
 echo "DONE WP"

@@ -1,22 +1,37 @@
 version: '3.7'
 
 services:
-  react:
-    container_name: react-app
-    build: ./react-app
-    env_file: ./.env
-    restart: on-failure
-    volumes:
-      # to react app debug & working on
-      # - ./react-app/react:/usr/app
-      - ./react-app/react-init.sh:/usr/app/react-init.sh
-    ports:
-      - 8080:3000
-    networks: 
-      - backend
-    links:
-      - wordpress
-    command: bash -c "./react-init.sh"
+  # react:
+  #   container_name: react-app
+  #   build: ./react-app
+  #   env_file: ./.env
+  #   restart: on-failure
+  #   volumes:
+  #     # to react app debug & working on
+  #     # - ./react-app/react:/usr/app
+  #     - ./react-app/react-init.sh:/usr/app/react-init.sh
+  #   ports:
+  #     - 8080:3000
+  #   networks: 
+  #     - backend
+  #   links:
+  #     - wordpress
+  #   command: bash -c "./react-init.sh"
+
+  # gatsby:
+  #   container_name: gatsby-app
+  #   build: ./gatsby-app
+  #   env_file: ./.env
+  #   restart: on-failure
+  #   volumes:
+  #     # to react app debug & working on
+  #     - ./gatsby-app/gatsby:/usr/app
+  #     - ./gatsby-app/gatsby-init.sh:/usr/app/gatsby-init.sh
+  #   ports:
+  #     - 8080:8000
+  #   networks: 
+  #     - backend
+  #   command: bash -c "./gatsby-init.sh"
 
   wordpress:
     image: wordpress:latest
@@ -31,7 +46,7 @@ services:
       - ./wp-app/config.yml:/var/www/html/config.yml
       - ./wp-app/wp-init.sh:/usr/local/bin/wp-init.sh
       - ./wp-app/wait-for-it.sh:/usr/local/bin/wait-for-it.sh
-      - ./wp-app/themes/:/var/www/html/wp-content/themes/
+      - ./wp-app/advanced-custom-fields-pro.zip:/var/www/html/advanced-custom-fields-pro.zip
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_USER: "${MYSQL_USER}"
@@ -50,20 +65,20 @@ services:
       - backend
     command: wait-for-it.sh -h db -p 3306 -t 60 -- wp-init.sh
  
-  pma:
-    image: phpmyadmin/phpmyadmin
-    restart: always
-    environment:
-      PMA_HOST: db
-      PMA_PORT: 3306
-      MYSQL_ROOT_PASSWORD: "${MYSQL_PASSWORD}"
-      MYSQL_USER: "${MYSQL_USER}"
-    ports:
-      - 3001:80
-    links:
-      - db
-    networks: 
-      - backend
+  # # pma:
+  # #   image: phpmyadmin/phpmyadmin
+  # #   restart: always
+  # #   environment:
+  # #     PMA_HOST: db
+  # #     PMA_PORT: 3306
+  # #     MYSQL_ROOT_PASSWORD: "${MYSQL_PASSWORD}"
+  # #     MYSQL_USER: "${MYSQL_USER}"
+  # #   ports:
+  # #     - 3001:80
+  # #   links:
+  # #     - db
+  # #   networks: 
+  # #     - backend
 
   db:
     image: mysql:5.7
